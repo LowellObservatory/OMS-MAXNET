@@ -1,0 +1,6 @@
+The SocketTester (in JOE) sends a "WY" (who are you) command to its OMS card every 60 seconds.
+The OMSSocketRouter reads from the OMS card and sends the message to the appropriate broker topic.
+The OMSSocketRouter has a timeout of 300 seconds, so this should never timeout while things are working.
+However, if the socket is bad/disconnected, it will get an IOError immediately upon read,
+So, the OMSSocketRouter will very quickly re-try the read and continue to get IOErrors until max-errors.
+That is, unless the card comes back on-line in the interim.

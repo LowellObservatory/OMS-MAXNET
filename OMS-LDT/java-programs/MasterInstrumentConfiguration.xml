@@ -1,0 +1,1651 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<instrument-config>
+  <user-accounts>
+    <user-account>
+      <user-id>developer</user-id>
+      <md5-password>5e8edd851d2fdfbd7415232c67367cc3</md5-password>
+    </user-account>
+    <user-account>
+      <user-id>szoonem</user-id>
+      <md5-password>c643f35f1c91abbd4ab6c819f491be8e</md5-password>
+    </user-account>
+    <user-account>
+      <user-id>obshipo</user-id>
+      <md5-password>8e5e5df2d7d09e45c2c35d9519587013</md5-password>
+    </user-account>
+  </user-accounts>
+  <ntp>
+    <time-server>gps1.lowell.edu</time-server>
+    <maximum-time-offset>500</maximum-time-offset>
+  </ntp>
+  <image-types>
+    <type>object</type>
+    <type>bias</type>
+    <type>sky flat</type>
+    <type>dome flat</type>
+    <type>focus</type>
+    <type>dark</type>
+  </image-types>
+  <status-bar>
+    <fold-mirror-period>10000</fold-mirror-period>
+    <fold-mirror-delay>5000</fold-mirror-delay>
+    <dome>
+      <heartbeat-period>1000</heartbeat-period>
+      <heartbeat-wait-cycle>10</heartbeat-wait-cycle>
+    </dome>
+  </status-bar>
+  <mail>
+    <host>mail.lowell.edu</host>
+    <from>
+      <address>szk@lowell.edu</address>
+      <name>Saeid Zoonemat Kermani</name>
+    </from>
+    <to>
+      <address>szk@lowell.edu</address>
+      <name>Saeid Zoonemat Kermani</name>
+    </to>
+    <subject>LOUI Error</subject>
+  </mail>
+  <tcs-dither-limit>900.0</tcs-dither-limit>
+  <joe>
+    <telemetry-period>2000</telemetry-period>
+    <telemetry-delay>1000</telemetry-delay>
+    <readout-period>1000</readout-period>
+    <readout-delay>1000</readout-delay>
+    <heartbeat-period>1000</heartbeat-period>
+    <heartbeat-wait-cycle>5</heartbeat-wait-cycle>
+    <time-between-active-socket-probes>60000</time-between-active-socket-probes>
+    <socket-probes-frequency-timeout>5</socket-probes-frequency-timeout>
+    <!-- This is the list of the TCS Topics that need to be filtered by frequency
+      for the LOUI to be able to handle them properly. -->
+    <tcs-topics>
+      <!-- TCS Status is published at 1 Hz by TCS -->
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSHighLevelStatusSV.TCSTcsStatusSV</name>
+        <joe-topic-name/>
+        <frequency>5</frequency>
+        <message-logger>.tcsStatus</message-logger>
+      </tcs-topic>
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSLowLevelStatusSV.NewScienceTargetSV</name>
+        <joe-topic-name/>
+        <frequency>1</frequency>
+        <message-logger>.newScienceTarget</message-logger>
+      </tcs-topic>
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSLowLevelStatusSV.TCSTcsCommandSV</name>
+        <joe-topic-name/>
+        <frequency>1</frequency>
+        <message-logger>.tcsCommand</message-logger>
+      </tcs-topic>
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSLowLevelStatusSV.TCSTcsCommandResponseSV</name>
+        <joe-topic-name/>
+        <frequency>1</frequency>
+        <message-logger>.tcsCommand</message-logger>
+      </tcs-topic>
+      <!-- Guider Status is published at 20 Hz by TCS -->
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSHighLevelStatusSV.TCSGuiderStatusSV</name>
+        <joe-topic-name/>
+        <frequency>20</frequency>
+        <message-logger>.tcsGuiderStatus</message-logger>
+      </tcs-topic>
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSLowLevelStatusSV.TCSGuiderCommandSV</name>
+        <joe-topic-name/>
+        <frequency>1</frequency>
+        <message-logger>.tcsGuiderCommand</message-logger>
+      </tcs-topic>
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSLowLevelStatusSV.TCSGuiderCommandResponseSV</name>
+        <joe-topic-name/>
+        <frequency>1</frequency>
+        <message-logger>.tcsGuiderCommand</message-logger>
+      </tcs-topic>
+      <!-- WavefrontSensor Status is published at 20 Hz by TCS -->
+      <tcs-topic>
+        <name>TCS.TCSSharedVariables.TCSHighLevelStatusSV.TCSWavefrontSensorStatusSV</name>
+        <joe-topic-name/>
+        <frequency>20</frequency>
+        <message-logger>.tcsWavefrontSensorStatus</message-logger>
+      </tcs-topic>
+    </tcs-topics>
+    <lois-producer-topics>
+      <topic-name>loisAnalysis</topic-name>
+      <topic-name>loisCommandResult</topic-name>
+      <topic-name>loisImage</topic-name>
+      <topic-name>loisLog</topic-name>
+      <topic-name>loisTelemetry</topic-name>
+    </lois-producer-topics>
+    <gwaves-producer-topics>
+      <topic-name>loisCommand</topic-name>
+    </gwaves-producer-topics>
+  </joe>
+  <!-- Common configuration for RC1 & RC2 such as filter wheel info -->
+  <rcprobe>
+    <maximum-number-images>1</maximum-number-images>
+    <storage-config>
+      <path>/data/lois</path>
+      <telescope-id>dct</telescope-id>
+      <instrument-id>gwaves</instrument-id>
+      <filename-abbr/>
+      <root-filename-date>true</root-filename-date>
+      <date-noon-rule>true</date-noon-rule>
+      <dash-number>off</dash-number>
+    </storage-config>
+    <filter-wheels>
+      <filter-wheel>
+        <name>RC Probe Filter Wheel</name>
+        <home-value>1</home-value>
+        <filters>
+          <filter>
+            <position>1</position>
+            <display-name>OPEN</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>OPEN</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>2</position>
+            <display-name>R</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>R</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>3</position>
+            <display-name>MLM1750</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>MLM1750</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>4</position>
+            <display-name>MLM768</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>MLM768_86</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>5</position>
+            <display-name>U</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>U</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>6</position>
+            <!-- B filter escaped RC1 wheel, found on 20210609 RTH
+            <display-name>B</display-name>
+            -->
+            <display-name>OPEN</display-name>
+            <focus-offset>0.0</focus-offset>
+            <!--
+            <fits-header-value>B</fits-header-value>
+            -->
+            <fits-header-value>OPEN</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>7</position>
+            <display-name>V</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>V</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>8</position>
+            <display-name>I</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>I</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+        </filters>
+      </filter-wheel>
+    </filter-wheels>
+    <focal-plane>
+      <rc1>
+        <tx>135.90</tx>
+        <ty>185.50</ty>
+        <sx>1.0</sx>
+        <sy>-1.0</sy>
+        <angle>5.25</angle>
+      </rc1>
+      <rc2>
+        <tx>142.17</tx>
+        <ty>185.19</ty>
+        <sx>-1.0</sx>
+        <sy>1.0</sy>
+        <angle>5.3</angle>
+      </rc2>
+    </focal-plane>
+    <tcs>
+      <offset-parameters>
+        <rc1>
+          <x-reference>140.0</x-reference>
+          <y-reference>136.0</y-reference>
+          <plate-scale>0.336</plate-scale>
+          <rotation-angle>0.0</rotation-angle>
+          <iaa>274.5</iaa>
+          <box-size>30</box-size>
+          <sx>1.0</sx>
+          <sy>-1.0</sy>
+          <guider-limit>2.0</guider-limit>
+        </rc1>
+        <rc2>
+          <x-reference>136.57</x-reference>
+          <y-reference>145.95</y-reference>
+          <plate-scale>0.336</plate-scale>
+          <rotation-angle>0.0</rotation-angle>
+          <iaa>96.3</iaa>
+          <box-size>30</box-size>
+          <sx>1.0</sx>
+          <sy>-1.0</sy>
+          <guider-limit>2.0</guider-limit>
+        </rc2>
+      </offset-parameters>
+      <!-- ccdPlateScale x [GuiderFocalPlaneScale / TelescopeFocalPlaneScale] -->
+      <guider-transformation>
+        <ccd-plate-scale>0.026</ccd-plate-scale>
+        <guider-focal-plane-scale>13.85</guider-focal-plane-scale>
+        <telescope-focal-plane-scale>8.06</telescope-focal-plane-scale>
+        <!-- angle definitions
+          RC1: 90 + theta
+          RC2: -90 + theta -->
+        <rc1>
+          <tx>0.0</tx>
+          <ty>0.0</ty>
+          <sx>-1.0</sx>
+          <sy>1.0</sy>
+          <angle>90.0</angle>
+        </rc1>
+        <rc2>
+          <tx>0.0</tx>
+          <ty>0.0</ty>
+          <sx>-1.0</sx>
+          <sy>1.0</sy>
+          <angle>-90.0</angle>
+        </rc2>
+      </guider-transformation>
+    </tcs>
+    <guider>
+      <analysis-parameters>
+        <size>50</size>
+        <gain>1.0</gain>
+        <radius>7</radius>
+        <inner-sky>10.0</inner-sky>
+        <outer-sky>14.0</outer-sky>
+      </analysis-parameters>
+      <non-sidereal-poll-period>
+        <fast>5000</fast>
+        <standard>10000</standard>
+        <slow>20000</slow>
+      </non-sidereal-poll-period>
+    </guider>
+    <aos-auto-focus>
+      <rc1>0.01131</rc1>
+      <rc2>0.01132</rc2>
+    </aos-auto-focus>
+    <!-- 20 GB -->
+    <storage-warning>20000000</storage-warning>
+  </rcprobe>
+  <deveny>
+    <maximum-number-images>1</maximum-number-images>
+    <storage-config>
+      <path>/home/obsdeveny</path>
+      <telescope-id/>
+      <instrument-id/>
+      <filename-abbr/>
+      <root-filename-date>true</root-filename-date>
+      <date-noon-rule>true</date-noon-rule>
+      <dash-number>off</dash-number>
+    </storage-config>
+    <tcs>
+      <offset-parameters>
+        <x-reference>1550</x-reference>
+        <y-reference>1550</y-reference>
+        <plate-scale>0.240</plate-scale>
+        <rotation-angle>0.0</rotation-angle>
+        <iaa>6.0</iaa>
+        <box-size>30</box-size>
+        <sx>1.0</sx>
+        <sy>-1.0</sy>
+      </offset-parameters>
+    </tcs>
+    <image-types>
+      <type>comparison</type>
+    </image-types>
+    <dsp-configuration-files>
+      <configuration-file-info>
+        <path>specialccdcfgs/hipo_blue.0x04_0x86_05.cfg</path>
+        <comment1>Very fast\, noisy\, full well OK</comment1>
+        <comment2>Very low light and moderately unflattenable</comment2>
+        <comment3> gain(7.43\,7.22) rnse(11.0\,11.0) well 14667</comment3>
+      </configuration-file-info>
+    </dsp-configuration-files>
+    <pdu-sockets>
+      <socket>2</socket>
+      <socket>3</socket>
+      <socket>4</socket>
+      <socket>5</socket>
+    </pdu-sockets>
+    <quick-look-box>
+      <along-dispersion>7</along-dispersion>
+      <cross-dispersion>21</cross-dispersion>
+    </quick-look-box>
+    <!-- 10 GB -->
+    <storage-warning>10000000</storage-warning>
+    <filter-wheels>
+      <filter-wheel>
+        <name>DeVeny Filter Wheel 1</name>
+        <home-value>1</home-value>
+        <filters>
+          <filter>
+            <position>1</position>
+            <display-name>Clear (C)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>Clear (C)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>2</position>
+            <display-name>GG420 (1)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>GG420 (1)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>3</position>
+            <display-name>GG495 (2)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>GG495 (2)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>4</position>
+            <display-name>OG570 (3)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>OG570 (3)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+        </filters>
+      </filter-wheel>
+      <filter-wheel>
+        <name>DeVeny Slit Viewer Filter Wheel</name>
+        <home-value>1</home-value>
+        <filters>
+          <filter>
+            <position>1</position>
+            <display-name>Clear (1)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>Clear (1)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>2</position>
+            <display-name>ND2 (2)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>ND2 (2)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>3</position>
+            <display-name>ND4 (3)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>ND4 (3)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>4</position>
+            <display-name>NaD2 (4)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>NaD2 (4)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>5</position>
+            <display-name>Clear (5)</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>Clear (5)</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+        </filters>
+      </filter-wheel>
+    </filter-wheels>
+    <gratings>
+      <grating>
+        <display-name>150/5000 g/mm / A blaze (DV1)</display-name>
+        <fits-header-value>150/5000</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>300/4000 g/mm / A blaze (DV2)</display-name>
+        <fits-header-value>300/4000</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>300/6750 g/mm / A blaze (DV3)</display-name>
+        <fits-header-value>300/6750</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>400/8500 g/mm / A blaze (DV4)</display-name>
+        <fits-header-value>400/8500</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>500/5500 g/mm / A blaze (DV5)</display-name>
+        <fits-header-value>500/5500</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>600/4900 g/mm / A blaze (DV6)</display-name>
+        <fits-header-value>600/4900</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>600/6750 g/mm / A blaze (DV7)</display-name>
+        <fits-header-value>600/6750</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>831/8000 g/mm / A blaze (DV8)</display-name>
+        <fits-header-value>831/8000</fits-header-value>
+      </grating>
+      <grating>
+        <display-name>1200/5000 g/mm / A blaze (DV9)</display-name>
+        <fits-header-value>1200/5000</fits-header-value>
+      </grating>
+    </gratings>
+    <focus>
+      <log-header xml:space="preserve">
+:    Image File Name  ColFoc    Grating  GrTilt  SltWth     Filter    LampCal  MntTmp
+      </log-header>
+      <execution-period>1000</execution-period>
+    </focus>
+  </deveny>
+  <lmi>
+    <maximum-number-images>1</maximum-number-images>
+    <storage-config>
+      <path/>
+      <telescope-id/>
+      <instrument-id>lmi</instrument-id>
+      <filename-abbr>lmi</filename-abbr>
+      <root-filename-date>false</root-filename-date>
+      <date-noon-rule>true</date-noon-rule>
+      <dash-number>off</dash-number>
+    </storage-config>
+    <tcs>
+      <!-- Full image size 6320x6160 -->
+      <offset-parameters>
+        <x-reference>3130</x-reference>
+        <y-reference>3064</y-reference>
+        <plate-scale>0.120</plate-scale>
+        <rotation-angle>0.0</rotation-angle>
+        <iaa>185.2</iaa>
+        <box-size>30</box-size>
+        <sx>1.0</sx>
+        <sy>-1.0</sy>
+      </offset-parameters>
+    </tcs>
+    <pettern-function-execution-period>1000</pettern-function-execution-period>
+    <!-- filter wheel information for LMI. -->
+    <filter-wheels>
+      <filter-wheel>
+        <name>Lower Filter Wheel (FW1)</name>
+        <home-value>1</home-value>
+        <backstep-percentage>20</backstep-percentage>
+        <filters>
+          <filter>
+            <position>1</position>
+            <display-name>OPEN</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>OPEN</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>2</position>
+            <display-name>SL-u</display-name>
+            <focus-offset>1.8E-4</focus-offset>
+            <fits-header-value>SDSS-U</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>3</position>
+            <display-name>SL-g</display-name>
+            <focus-offset>1.8E-4</focus-offset>
+            <fits-header-value>SDSS-G</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>4</position>
+            <display-name>SL-r</display-name>
+            <focus-offset>1.8E-4</focus-offset>
+            <fits-header-value>SDSS-R</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>5</position>
+            <display-name>SL-i</display-name>
+            <focus-offset>1.8E-4</focus-offset>
+            <fits-header-value>SDSS-I</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>6</position>
+            <display-name>SL-z</display-name>
+            <focus-offset>1.8E-4</focus-offset>
+            <fits-header-value>SDSS-Z</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>7</position>
+            <display-name>CN</display-name>
+            <focus-offset>1.75E-4</focus-offset>
+            <fits-header-value>CN</fits-header-value>
+            <wavelength>0.387</wavelength>
+          </filter>
+          <filter>
+            <position>8</position>
+            <display-name>RC</display-name>
+            <focus-offset>1.75E-4</focus-offset>
+            <fits-header-value>RC</fits-header-value>
+            <wavelength>0.7128</wavelength>
+          </filter>
+          <filter>
+            <position>9</position>
+            <display-name>VR</display-name>
+            <focus-offset>1.85E-4</focus-offset>
+            <fits-header-value>VR</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>10</position>
+            <display-name>YISH</display-name>
+            <focus-offset>1.05E-4</focus-offset>
+            <fits-header-value>YISH</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+        </filters>
+      </filter-wheel>
+      <filter-wheel>
+        <name>Upper Filter Wheel (FW2)</name>
+        <home-value>1</home-value>
+        <backstep-percentage>20</backstep-percentage>
+        <filters>
+          <filter>
+            <position>1</position>
+            <display-name>OPEN</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>OPEN</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>2</position>
+            <display-name>DARK</display-name>
+            <focus-offset>0.0</focus-offset>
+            <fits-header-value>DARK</fits-header-value>
+            <wavelength>0.0</wavelength>
+          </filter>
+          <filter>
+            <position>3</position>
+            <display-name>OH</display-name>
+            <focus-offset>1.75E-4</focus-offset>
+            <fits-header-value>OH</fits-header-value>
+            <wavelength>0.309</wavelength>
+          </filter>
+          <filter>
+            <position>4</position>
+            <display-name>C3</display-name>
+            <focus-offset>1.75E-4</focus-offset>
+            <fits-header-value>C3</fits-header-value>
+            <wavelength>0.4062</wavelength>
+          </filter>
+          <filter>
+            <position>5</position>
+            <display-name>BC</display-name>
+            <focus-offset>1.75E-4</focus-offset>
+            <fits-header-value>BC</fits-header-value>
+            <wavelength>0.445</wavelength>
+          </filter>
+          <filter>
+            <position>6</position>
+            <display-name>I</display-name>
+            <focus-offset>1.4E-4</focus-offset>
+            <fits-header-value>I</fits-header-value>
+            <wavelength>0.8064</wavelength>
+          </filter>
+          <filter>
+            <position>7</position>
+            <display-name>R</display-name>
+            <focus-offset>1.4E-4</focus-offset>
+            <fits-header-value>R</fits-header-value>
+            <wavelength>0.6329</wavelength>
+          </filter>
+          <filter>
+            <position>8</position>
+            <display-name>V</display-name>
+            <focus-offset>1.05E-4</focus-offset>
+            <fits-header-value>V</fits-header-value>
+            <wavelength>0.5369</wavelength>
+          </filter>
+          <filter>
+            <position>9</position>
+            <display-name>B</display-name>
+            <focus-offset>1.05E-4</focus-offset>
+            <fits-header-value>B</fits-header-value>
+            <wavelength>0.4277</wavelength>
+          </filter>
+          <filter>
+            <position>10</position>
+            <display-name>U</display-name>
+            <focus-offset>1.4E-4</focus-offset>
+            <fits-header-value>U</fits-header-value>
+            <wavelength>0.3656</wavelength>
+          </filter>
+        </filters>
+      </filter-wheel>
+    </filter-wheels>
+    <focus-parameters>
+      <bin>2</bin>
+      <exposure-time>3.0</exposure-time>
+      <flags>save</flags>
+      <focus-step>30.0</focus-step>
+      <focus-base>150.0</focus-base>
+      <title>Focus Run</title>
+    </focus-parameters>
+    <pointing-data-collection-subframe>
+      <subframe-number>9</subframe-number>
+      <xpix>1565</xpix>
+      <ypix>1532</ypix>
+      <xsize>200</xsize>
+      <ysize>200</ysize>
+    </pointing-data-collection-subframe>
+    <pre-scan>50</pre-scan>
+    <dsp-configuration-files>
+      <configuration-file-info>
+        <path>specialccdcfgs/hipo_blue.0x04_0x86_05.cfg</path>
+        <comment1>Very fast\, noisy\, full well OK</comment1>
+        <comment2>Very low light and moderately unflattenable</comment2>
+        <comment3> gain(7.43\,7.22) rnse(11.0\,11.0) well 14667</comment3>
+      </configuration-file-info>
+    </dsp-configuration-files>
+    <!-- 50 GB -->
+    <storage-warning>50000000</storage-warning>
+  </lmi>
+  <nihts>
+    <maximum-number-images>2</maximum-number-images>
+    <storage-config>
+      <path/>
+      <telescope-id/>
+      <instrument-id>nihts</instrument-id>
+      <filename-abbr/>
+      <root-filename-date>true</root-filename-date>
+      <date-noon-rule>true</date-noon-rule>
+      <dash-number>off</dash-number>
+    </storage-config>
+    <tcs>
+      <offset-parameters>
+        <x-reference>1550</x-reference>
+        <y-reference>1550</y-reference>
+        <plate-scale>0.240</plate-scale>
+        <rotation-angle>0.0</rotation-angle>
+        <iaa>6.0</iaa>
+        <box-size>30</box-size>
+        <sx>1.0</sx>
+        <sy>-1.0</sy>
+      </offset-parameters>
+    </tcs>
+    <image-types>
+      <type>comparison</type>
+    </image-types>
+    <dsp-configuration-files>
+      <configuration-file-info>
+        <path>specialccdcfgs/hipo_blue.0x04_0x86_05.cfg</path>
+        <comment1>Very fast\, noisy\, full well OK</comment1>
+        <comment2>Very low light and moderately unflattenable</comment2>
+        <comment3> gain(7.43\,7.22) rnse(11.0\,11.0) well 14667</comment3>
+      </configuration-file-info>
+    </dsp-configuration-files>
+    <!-- 20 GB -->
+    <storage-warning>20000000</storage-warning>
+  </nihts>
+  <igrins>
+    <tcs>
+      <offset-parameters>
+        <x-reference>1550</x-reference>
+        <y-reference>1550</y-reference>
+        <plate-scale>0.240</plate-scale>
+        <rotation-angle>0.0</rotation-angle>
+        <iaa>5.2</iaa>
+        <box-size>30</box-size>
+        <sx>1.0</sx>
+        <sy>-1.0</sy>
+      </offset-parameters>
+    </tcs>
+  </igrins>
+  <!-- The OMS Card info -->
+  <oms-cards>
+    <oms-card>
+      <name>RC1</name>
+      <address>10.11.131.91</address>
+      <port>4321</port>
+      <enable>true</enable>
+      <axes>
+        <axis>
+          <name>AX</name>
+          <function>RC1.X</function>
+          <description>X Axis for Probe 1</description>
+          <initialization-command>PA1; LTH; HH; PSE; EDI; </initialization-command>
+          <home-command>HR0; MA0; GO; ID;</home-command>
+          <velocity>25000</velocity>
+          <acceleration>25000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>291.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>2500</motor-scale>
+          <encoder-scale>10000</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AY</name>
+          <function>RC1.Y</function>
+          <description>Y Axis for Probe 1</description>
+          <initialization-command>PA1; LTH; HH; PSE; EDI; </initialization-command>
+          <home-command>HR0; MA0; GO; ID; </home-command>
+          <velocity>25000</velocity>
+          <acceleration>25000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>189.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>2500</motor-scale>
+          <encoder-scale>10000</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AZ</name>
+          <function>RC1.Z</function>
+          <description>Z Axis (Focus) for Probe 1</description>
+          <initialization-command>PA1; LTL; HL; </initialization-command>
+          <home-command>HR;</home-command>
+          <velocity>12500</velocity>
+          <acceleration>12500</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>92.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>6300</motor-scale>
+          <encoder-scale>63000</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AT</name>
+          <function>RC1.F</function>
+          <description>Filter Wheel for Probe 1</description>
+          <initialization-command>PA1; LTL; HL; </initialization-command>
+          <home-command>HR0; MA0; GO; ID;</home-command>
+          <velocity>100</velocity>
+          <acceleration>1000</acceleration>
+          <min-value>1</min-value>
+          <max-value>8</max-value>
+          <home-value>1</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>100</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>position #</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+      </axes>
+    </oms-card>
+    <oms-card>
+      <name>RC2</name>
+      <address>10.11.131.92</address>
+      <port>4321</port>
+      <enable>true</enable>
+      <axes>
+        <axis>
+          <name>AX</name>
+          <function>RC2.X</function>
+          <description>X Axis for Probe 2</description>
+          <initialization-command>PA1; LTH; HH; PSE; EDI; </initialization-command>
+          <home-command>HR0; MA0; GO; ID; </home-command>
+          <velocity>25000</velocity>
+          <acceleration>25000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>291.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>2500</motor-scale>
+          <encoder-scale>10000</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AY</name>
+          <function>RC2.Y</function>
+          <description>Y Axis for Probe 2</description>
+          <initialization-command>PA1; LTH; HH; PSE; EDI; </initialization-command>
+          <home-command>HR0; MA0; GO; ID; </home-command>
+          <velocity>25000</velocity>
+          <acceleration>25000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>90.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>2500</motor-scale>
+          <encoder-scale>10000</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AZ</name>
+          <function>RC2.Z</function>
+          <description>Z Axis (Focus) for Probe 2</description>
+          <initialization-command>PA1; LTL; HL; </initialization-command>
+          <home-command>HR;</home-command>
+          <velocity>12500</velocity>
+          <acceleration>12500</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>93.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>6300</motor-scale>
+          <encoder-scale>63000</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AT</name>
+          <function>RC2.F</function>
+          <description>Filter Wheel for Probe 2</description>
+          <initialization-command>PA1; LTL; HL; </initialization-command>
+          <home-command>HR0; MA0; GO; ID;</home-command>
+          <velocity>100</velocity>
+          <acceleration>1000</acceleration>
+          <min-value>1</min-value>
+          <max-value>8</max-value>
+          <home-value>1</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>100</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>position #</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+      </axes>
+    </oms-card>
+    <oms-card>
+      <name>OMS3</name>
+      <address>10.11.131.93</address>
+      <port>4321</port>
+      <enable>true</enable>
+      <axes>
+        <axis>
+          <name>AX</name>
+          <function>FM-A</function>
+          <description>IGRINS</description>
+          <initialization-command>PA1; LTH; HTH; </initialization-command>
+          <home-command>HR0;MA0;GO;ID</home-command>
+          <velocity>2500</velocity>
+          <acceleration>10000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>37536.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>157.48</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AY</name>
+          <function>FM-B</function>
+          <description>EXPRES</description>
+          <initialization-command>PA1; LTH; HTH; </initialization-command>
+          <home-command>HR;MA0;GO;ID</home-command>
+          <velocity>2500</velocity>
+          <acceleration>10000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>38795.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>157.48</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AT</name>
+          <function>LMI.F1</function>
+          <description>Lower Filter Wheel for LMI</description>
+          <initialization-command>PA1; LTL; HL; </initialization-command>
+          <home-command>HM0; MA0; GO; ID; </home-command>
+          <velocity>500</velocity>
+          <acceleration>750</acceleration>
+          <min-value>1</min-value>
+          <max-value>10</max-value>
+          <home-value>1</home-value>
+          <increment-value>10</increment-value>
+          <motor-scale>465</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>position #</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+      </axes>
+    </oms-card>
+    <oms-card>
+      <name>OMS4</name>
+      <address>10.11.131.94</address>
+      <port>4321</port>
+      <enable>true</enable>
+      <axes>
+        <axis>
+          <name>AX</name>
+          <function>FM-C</function>
+          <description>DeVeny Spectrograph</description>
+          <initialization-command>PA1; LTH; HTH; </initialization-command>
+          <home-command>HR0;MA0;GO;ID</home-command>
+          <velocity>2500</velocity>
+          <acceleration>10000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>37385.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>157.48</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AY</name>
+          <function>FM-D</function>
+          <description>NIHTS</description>
+          <initialization-command>PA1; LTH; HTH; </initialization-command>
+          <home-command>HR0;MA0;GO;ID</home-command>
+          <velocity>2500</velocity>
+          <acceleration>10000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>38151.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>157.48</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AZ</name>
+          <function>IC</function>
+          <description>Instrument Cover</description>
+          <initialization-command>PA1; LTH; HL; </initialization-command>
+          <home-command>HR;</home-command>
+          <velocity>200</velocity>
+          <acceleration>1000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>1615</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>81.37</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>#0.00 in</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AT</name>
+          <function>LMI.F2</function>
+          <description>Upper Filter Wheel for LMI</description>
+          <initialization-command>PA1; LTL; HL; </initialization-command>
+          <home-command>HM0; MA0; GO; ID;</home-command>
+          <velocity>500</velocity>
+          <acceleration>750</acceleration>
+          <min-value>1</min-value>
+          <max-value>10</max-value>
+          <home-value>1</home-value>
+          <increment-value>10</increment-value>
+          <motor-scale>470</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>position #</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+      </axes>
+    </oms-card>
+    <oms-card>
+      <name>DEVENY</name>
+      <address>devenymot1.lowell.edu</address>
+      <port>4321</port>
+      <enable>true</enable>
+      <axes>
+        <axis>
+          <name>AX</name>
+          <function>DGT</function>
+          <description>Grating Tilt</description>
+          <initialization-command>LTH; HTH; PA1; PSE; ECI;</initialization-command>
+          <home-command>HR0; MA0; GO; ID;</home-command>
+          <velocity>5000</velocity>
+          <acceleration>250000</acceleration>
+          <min-value>0.0</min-value>
+          <max-value>48.0</max-value>
+          <home-value>0.0</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>15384.6</motor-scale>
+          <encoder-scale>1230.77</encoder-scale>
+          <unit>#0.00°</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AY</name>
+          <function>DSW</function>
+          <description>Slit Width</description>
+          <initialization-command>LTL; HTH; PA1; </initialization-command>
+          <home-command>HR0; MA0; GO; ID;</home-command>
+          <velocity>1600</velocity>
+          <acceleration>16000</acceleration>
+          <min-value>0.490</min-value>
+          <max-value>85.62</max-value>
+          <home-value>85.62</home-value>
+          <increment-value>-1</increment-value>
+          <motor-scale>979</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>#0.00"</unit>
+          <alternate-unit-conversion>0.153</alternate-unit-conversion>
+          <alternate-unit>#0.000 mm</alternate-unit>
+        </axis>
+        <axis>
+          <name>AZ</name>
+          <function>DCF</function>
+          <description>Collimator Focus</description>
+          <initialization-command>LTH; HTH; PA1; PSE; ECI; EDI; </initialization-command>
+          <home-command>MR-42500; GO; ID; HM0; MA0; GO; ID;</home-command>
+          <velocity>7500</velocity>
+          <acceleration>250000</acceleration>
+          <min-value>7.75</min-value>
+          <max-value>18.25</max-value>
+          <home-value>12.12</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>78740.2</motor-scale>
+          <encoder-scale>6299.21</encoder-scale>
+          <unit>#0.00 mm</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+        <axis>
+          <name>AT</name>
+          <function>DFW</function>
+          <description>DeVeny SlitViewer Filter Wheel</description>
+          <initialization-command>PA1; HL; </initialization-command>
+          <home-command>HR0; MA0; GO; ID;</home-command>
+          <velocity>75</velocity>
+          <acceleration>1000</acceleration>
+          <min-value>1</min-value>
+          <max-value>5</max-value>
+          <home-value>1</home-value>
+          <increment-value>1</increment-value>
+          <motor-scale>80</motor-scale>
+          <encoder-scale>-1.0</encoder-scale>
+          <unit>position #</unit>
+          <alternate-unit-conversion>-1.0</alternate-unit-conversion>
+          <alternate-unit/>
+        </axis>
+      </axes>
+    </oms-card>
+  </oms-cards>
+  <pdus>
+    <!--
+      <pdu>
+      <display-name>Virtual PDU</display-name>
+      <address>localhost</address>
+      <port>11111</port>
+      <enable>true</enable>
+      <unit-name>@@@@</unit-name>
+      </pdu>
+    -->
+    <pdu>
+      <display-name>DeVeny</display-name>
+      <address>devenypdu.lowell.edu</address>
+      <port>23</port>
+      <enable>true</enable>
+      <unit-name>@@@@</unit-name>
+    </pdu>
+    <pdu>
+      <display-name>PDU1</display-name>
+      <address>gwavespdu1.lowell.edu</address>
+      <port>23</port>
+      <enable>true</enable>
+      <unit-name>@@@@</unit-name>
+    </pdu>
+    <pdu>
+      <display-name>PDU2</display-name>
+      <address>gwavespdu2.lowell.edu</address>
+      <port>23</port>
+      <enable>true</enable>
+      <unit-name>@@@@</unit-name>
+    </pdu>
+  </pdus>
+  <widget-info>
+    <!-- Common/Generic labels & tooltips used in most LOUIs. -->
+    <common>
+      <labels>
+        <label>
+          <widget-name>LOISTitle</widget-name>
+          <body>Image Title:</body>
+        </label>
+        <label>
+          <widget-name>LOISExposureTime</widget-name>
+          <body>Exposure Time (s):</body>
+        </label>
+        <label>
+          <widget-name>LOISNumExposures</widget-name>
+          <body>Number of Exposures:</body>
+        </label>
+        <label>
+          <widget-name>LOISFrameType</widget-name>
+          <body>Frame Type:</body>
+        </label>
+        <label>
+          <widget-name>LOISComment1</widget-name>
+          <body>FITS Comment 1:</body>
+        </label>
+        <label>
+          <widget-name>LOISComment2</widget-name>
+          <body>FITS Comment 2:</body>
+        </label>
+        <label>
+          <widget-name>LOISAmplifier</widget-name>
+          <body>Amplifier:</body>
+        </label>
+        <label>
+          <widget-name>LOISSubframe</widget-name>
+          <body>Subframe:</body>
+        </label>
+        <label>
+          <widget-name>LOISBinFactor</widget-name>
+          <body>Binning Factor:</body>
+        </label>
+        <label>
+          <widget-name>LOISOverScan</widget-name>
+          <body>Over Scan:</body>
+        </label>
+        <label>
+          <widget-name>AutoPopulateImageTitle</widget-name>
+          <body>Auto Populate Image Title</body>
+        </label>
+        <label>
+          <widget-name>ReadoutSound</widget-name>
+          <body>End of Readout Sound File:</body>
+        </label>
+        <label>
+          <widget-name>ExposureSound</widget-name>
+          <body>End of Exposure Sound File:</body>
+        </label>
+        <label>
+          <widget-name>SeriesSound</widget-name>
+          <body>End of Series Sound File:</body>
+        </label>
+        <label>
+          <widget-name>BlockedExposureSound</widget-name>
+          <body>Blocked Exposure Sound File:</body>
+        </label>
+        <label>
+          <widget-name>EnableButton</widget-name>
+          <body>Enable</body>
+        </label>
+        <label>
+          <widget-name>DisableButton</widget-name>
+          <body>Disable</body>
+        </label>
+        <label>
+          <widget-name>StatusButton</widget-name>
+          <body>Get Status</body>
+        </label>
+        <label>
+          <widget-name>LampsOffButton</widget-name>
+          <body>All Lamps Off</body>
+        </label>
+        <label>
+          <widget-name>CDSImage</widget-name>
+          <body>CDS Image</body>
+        </label>
+      </labels>
+      <tooltips>
+        <tooltip>
+          <widget-name>TestExposure</widget-name>
+          <body>
+        <![CDATA[
+Takes an image and stores it in "test.fits".
+This will override the previous test image.
+Single Frame\, 1 Exposure.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>PromoteTestExposure</widget-name>
+          <body>
+        <![CDATA[
+Promotes the test image "test.fits" to the next numbered image.
+This only works if the test image was the last command/action.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>GoExposure</widget-name>
+          <body>
+        <![CDATA[
+Single Frame\, 1 or Multiple Exposures.
+Save in Numbered Image File.
+NOTE: Stop Series Button will stop multiple exposure series
+      as soon as the current one is finished.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>Reset</widget-name>
+          <body>
+        <![CDATA[
+Resets all the fields to default values
+Default Values are read from the config file.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>InitializeFilterWheel</widget-name>
+          <body>Initialize the Filter Wheel Axis.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>MoveFilterWheel</widget-name>
+          <body>Move Filter Wheel Now.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>HomeFilterWheel</widget-name>
+          <body>Resynchronize Filter Wheel to position 1.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>InitializeAllAxes</widget-name>
+          <body>Sends the initialize commands for all axes on this card.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>HomeAllAxes</widget-name>
+          <body>Sends the Home command for all axes on this card.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>KillAllAxes</widget-name>
+          <body>Kills All the Active Commands.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>LOISTitleLabel</widget-name>
+          <body>The content of this text box will be in FITS OBJNAME &amp;&amp; OBJECT keys.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>AutoPopulateImageTitleButton</widget-name>
+          <body>Selecting this check box causes the Image Title to be populated automatically by the science target name.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ReadoutSound</widget-name>
+          <body>
+        <![CDATA[
+"Readout Complete" sound will play after a readout 
+has been completed. It does not depend on whether 
+it was the end of a series or not.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ExposureSound</widget-name>
+          <body>
+        <![CDATA[
+"Exposure Complete" sound will play at the end of each 
+exposure (start of the readout) within a series where
+num_exposures > 1 except for the last one. The last
+last exposure in the series is pre-empted with the
+"Series Complete" sound so if that sound is off\, nothing
+will play.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>SeriesSound</widget-name>
+          <body>
+        <![CDATA[
+"Series Complete" sound will play at the end of the last
+exposure for the series and it overrides "Exposure Complete"
+sound so for num_exposures = 1 only "Series Complete" sound
+will play.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>BlockedExposureSound</widget-name>
+          <body>
+        <![CDATA[
+"Blocked Exposure" sound will play if LOIS detects a problem
+with the exposure\, such as bad telemetry\, and blocks the
+exposure. Please check LOIS logs for more information for
+the reason the exposure was blocked.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>AxisStatusLabel</widget-name>
+          <body>
+        <![CDATA[
+1     P   Moving in positive direction
+1     M   Moving in negative direction
+
+2     D   Done (ID\, II or IN command has been executed\, set to N by this command or IC command)
+2     N   No ID executed yet
+  
+3     L   Axis in overtravel. Char 4 tells which direction. Set to N when limit switch is not active.
+3     N   Not in overtravel in this direction
+
+4     H   Home switch active. Set to N when home switch is not active.
+4     N   Home switch not active        ]]>
+          </body>
+        </tooltip>
+      </tooltips>
+    </common>
+    <!-- Master list of tooltips for LMI. -->
+    <lmi>
+      <tooltips>
+        <tooltip>
+          <widget-name>TcsOffset</widget-name>
+          <body>
+        <![CDATA[
+Sends pointing offset command to the DCT TCS. The following options are available for types:
+- tplane (tangent plane) - default
+- simple (coordinate based)
+- pa (position angle based)
+
+All offsets supported directly by the TCS are absolute not relative. An offset of
+0\, 0 always returns to the original pointing origin specified with the Science Target\,
+or the last pointing that was 'absorbed'.
+
+The units are:
+- tplane: arc-seconds for both offsets
+- simple: offset1 in seconds of time & offset2 in arc-seconds
+- pa: offset1 in arc-seconds & offset2 in degrees
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>TcsOffsetSend</widget-name>
+          <body>Sends pointing offset command to the DCT TCS.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>TcsOffsetClear</widget-name>
+          <body>Sets the absolute offset to 0.0\, 0.0.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>TcsOffsetAbsorb</widget-name>
+          <body>Current position becomes the pointing origin.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>RelOffset</widget-name>
+          <body>
+        <![CDATA[
+Simulates sending of a relative pointing offset command to the DCT TCS. The type options
+and units are similar to the absolute offset.
+
+TCS only supports and understands absolute offsets. We are simulating a relative offset
+by sending an absoulte offset and then issuing an absorb command immediately afterwards 
+to move the TCS's pointing reference.
+
+Neither the TCS or the LMI LOUI are keeping track of the origin so to go back to the original
+science target\, the user needs to either issue the slew command again or trace back the offset
+path back to the origin. Absolute and relative offsets should not be intermingled.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>RelOffsetSend</widget-name>
+          <body>Sends absolute offset and absorb commands sequentially to simulate a reletive offset.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>DitherLabel</widget-name>
+          <body>
+        <![CDATA[
+Performs a dither function based on a pattern file.
+Format of the input lines:
+"Title" exposureTime offset1 offset2 filterName "Comment"
+
+Offsets supported directly by the TCS are absolute not relative. An offset of
+0\, 0 always returns to the original pointing origin specified with the Science 
+Target\, or the last pointing that was 'absorbed'.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>SlewLabel</widget-name>
+          <body>
+        <![CDATA[
+Performs a slew\, dither\, or a filter move based on a pattern file.
+Please refer to the documentation on Confluence for the format of 
+the input lines.
+
+Offsets supported directly by the TCS are absolute not relative. An offset of
+0\, 0 always returns to the original pointing origin specified with the Science 
+Target\, or the last pointing that was 'absorbed'.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>LoadPatternFileButton</widget-name>
+          <body>
+        <![CDATA[
+Loads the pattern file and validates the input.
+The default extension is *.txt but the dialog box
+allows selection of other types.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ExecutePatternFileButton</widget-name>
+          <body>
+        <![CDATA[
+Executes the commands in the current row of the pattern file.
+The commands can include a move (slew or dither)\, filter move\, and
+and exposure command.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>AbortPatternFileButton</widget-name>
+          <body>
+        <![CDATA[
+Aborts the execution of the pattern as soon as possible. If an exposure
+has started\, LOIS may decide to continue the exposure depending on where
+it is in its execution loop. The file will not be saved.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>PausePatternFileButton</widget-name>
+          <body>
+        <![CDATA[
+Pauses the execution of the pattern at the next actionable item. An
+exposure or a series of exposures will continue till concluded.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ResumePatternFileButton</widget-name>
+          <body>Resumes the execution of the pattern.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>PatternDitherMaximumLabel</widget-name>
+          <body>
+        <![CDATA[
+If guiding\, make sure that this value (maximum dither 
+radius) is not larger than the dither tolerance for the 
+guide star.
+
+The guider code does not check for this value and if this
+condition is violated\, the probe will reach a limit and 
+the guide star will not be re-acquired properly.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>FocusBase</widget-name>
+          <body>
+        <![CDATA[
+The focus base is the midpoint of the focus sweep. The first acquisition 
+is done there and then the focus sweep starts from low to high. If the 
+focus fails or is aborted it will return to this value\, irrespective of 
+what the focus base was before the script ran.
+        ]]>
+          </body>
+        </tooltip>
+      </tooltips>
+    </lmi>
+    <!-- Master list of tooltips for JOE Client. -->
+    <joe>
+      <tooltips>
+        <tooltip>
+          <widget-name>ZernikesSendAccumulatedValues</widget-name>
+          <body>
+        <![CDATA[
+Send current values to JOE\, accumulate on JOE\,
+and send the results to AOS by publishing to broker.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ZernikesClearJoeAccumulator</widget-name>
+          <body>Clear (set to 0) the accumulated values on JOE.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ZernikesClearAll</widget-name>
+          <body>Clears JOE's accumulator and sends zeros to AOS.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ZernikesDisplayJoeAccumulator</widget-name>
+          <body>Get the accumulated values on JOE and update the display.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>ZernikesReset</widget-name>
+          <body>Reset the values in the text boxes to 0.</body>
+        </tooltip>
+      </tooltips>
+    </joe>
+    <!-- Master list of tooltips for GDR and WFS. -->
+    <rcprobe>
+      <tooltips>
+        <tooltip>
+          <widget-name>InitialExposure</widget-name>
+          <body>Takes the first image to be used as guide reference.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>StartGuide</widget-name>
+          <body>Sends the Guide On command to the TCS and starts the occultation series.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>StopGuide</widget-name>
+          <body>Sends the Guide Off command to the TCS and aborts the occultation series.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>GuideOnOff</widget-name>
+          <body>
+        <![CDATA[
+A push button for issuing the command.
+It does not reflect the state of guiding.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>VirtualGuideOn</widget-name>
+          <body>
+        <![CDATA[
+A push button for issuing the command.
+It does not reflect the state of guiding.
+
+Disables the Guide On/Off buttons.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>VirtualGuideOff</widget-name>
+          <body>
+        <![CDATA[
+A push button for issuing the command.
+It does not reflect the state of guiding.
+
+Re-enables the Guide On/Off buttons.
+        ]]>
+          </body>
+        </tooltip>
+      </tooltips>
+    </rcprobe>
+    <!-- Master list of tooltips for DeVeny. -->
+    <deveny>
+      <labels>
+        <label>
+          <widget-name>SlitWidthTitle</widget-name>
+          <body>Slit Width (″)</body>
+        </label>
+        <label>
+          <widget-name>GratingTiltTitle</widget-name>
+          <body>Grating Tilt (°)</body>
+        </label>
+        <label>
+          <widget-name>CollimatorFocusTitle</widget-name>
+          <body>Collimator Focus (mm)</body>
+        </label>
+      </labels>
+      <tooltips>
+        <tooltip>
+          <widget-name>StatusButton</widget-name>
+          <body>
+        <![CDATA[
+Send a "DN0" command to the PDU which will return
+the status of all the sockets in this PDU.
+
+The timestamp will update automatically when the
+message is received from the PDU.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>LampsOffButton</widget-name>
+          <body>
+        <![CDATA[
+Send "Fxx" command to the PDU for all the lamps.
+This will turn all the lamps off.
+        ]]>
+          </body>
+        </tooltip>
+        <tooltip>
+          <widget-name>EnableButton</widget-name>
+          <body>Enables the buttons for controlling the lamps.</body>
+        </tooltip>
+        <tooltip>
+          <widget-name>DisableButton</widget-name>
+          <body>
+        <![CDATA[
+Disables the buttons so one does not accidentally
+turn on a lamp in the middle of an observation.
+        ]]>
+          </body>
+        </tooltip>
+      </tooltips>
+    </deveny>
+    <nihts>
+      <tooltip>
+        <widget-name>CDSImageButton</widget-name>
+        <body>Selecting this check box adds {cds=true} to the LOIS exposure command.</body>
+      </tooltip>
+    </nihts>
+  </widget-info>
+</instrument-config>
