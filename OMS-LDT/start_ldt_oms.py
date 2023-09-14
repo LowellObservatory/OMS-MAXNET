@@ -8,7 +8,7 @@ def routecard(omscard):
     data = None
 
     while True:
-        r, w, e = select.select([omscard], [], [], 10.0)  # Make sure we block on read.
+        r, w, e = select.select([omscard], [], [], 20.0)  # Make sure we block on read.
         if not (r or w or e):
             print("timed out, do some other work here")
         if r:
@@ -29,6 +29,7 @@ def testcard(omscard):
 
 if __name__ == "__main__":
     # Connect to the omscard.
+    socket.setdefaulttimeout(10.0)
     omscard = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     time.sleep(1.0)
 
@@ -38,36 +39,42 @@ if __name__ == "__main__":
     # creating multiple processes
     ctx = mp.get_context("spawn")
     proc1 = ctx.Process(target=testcard, args=(omscard,))
-    proc1.start()
+    # proc1.start()
     proc2 = ctx.Process(target=routecard, args=(omscard,))
     proc2.start()
 
-    time.sleep(10.0)
+    for i in range(100):
+        time.sleep(10.0)
 
-    # Let's move the stepper motor back and forth.
-    omscard.sendall(b"AX;")
-    # time.sleep(0.1)
-    omscard.sendall(b"VL1000;")
-    # time.sleep(0.1)
-    omscard.sendall(b"AC1000;")
-    # time.sleep(0.1)
-    omscard.sendall(b"DC1000;")
-    # time.sleep(0.1)
-    omscard.sendall(b"GP4000;")
-    # time.sleep(1.1)
-    omscard.sendall(b"GP0;")
-    # time.sleep(1.1)
+        # Let's move the stepper motor back and forth.
+        omscard.sendall(b"AX;")
+        omscard.sendall(b"VL1000;")
+        omscard.sendall(b"AC1000;")
+        omscard.sendall(b"DC1000;")
+        omscard.sendall(b"GP200;")
+        time.sleep(10.0)
 
-    time.sleep(10.0)
+        omscard.sendall(b"AX")  # select axis Y
+        omscard.sendall(b"QA")  # query axis status
+        omscard.sendall(b"AY")  # select axis Y
+        omscard.sendall(b"QA")  # query axis status
 
-    omscard.sendall(b"AX")  # select axis Y
-    omscard.sendall(b"QA")  # query axis status
-    omscard.sendall(b"AY")  # select axis Y
-    omscard.sendall(b"QA")  # query axis status
+        omscard.sendall(b"AX;")
+        omscard.sendall(b"VL1000;")
+        omscard.sendall(b"AC1000;")
+        omscard.sendall(b"DC1000;")
+        omscard.sendall(b"GP0;")
 
-    time.sleep(10.0)
+        time.sleep(10.0)
 
-    proc1.terminate()
+        omscard.sendall(b"AX")  # select axis Y
+        omscard.sendall(b"QA")  # query axis status
+        omscard.sendall(b"AY")  # select axis Y
+        omscard.sendall(b"QA")  # query axis status
+
+        time.sleep(10.0)
+
+    # proc1.terminate()
     proc2.terminate()
 
     # Processes finished
